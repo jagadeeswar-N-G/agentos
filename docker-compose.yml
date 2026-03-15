@@ -7,22 +7,12 @@ services:
       - "8000:8000"         # expose port
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - QDRANT_URL=http://qdrant:6333    # talk to qdrant container
-      - REDIS_URL=redis://redis:6379 
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - QDRANT_URL=${QDRANT_URL}
+      - QDRANT_API_KEY=${QDRANT_API_KEY}
+      - REDIS_URL=${REDIS_URL}
       - LANGSMITH_TRACING=${LANGSMITH_TRACING}
-      - LANGSMITH_ENDPOINT=${LANGSMITH_ENDPOINT}
       - LANGSMITH_API_KEY=${LANGSMITH_API_KEY}
-      - LANGSMITH_PROJECT=${LANGSMITH_PROJECT}    # talk to redis container
-    depends_on:
-      - qdrant              # start qdrant before api
-      - redis
-
-  qdrant:
-    image: qdrant/qdrant    # pull from Docker Hub
-    ports:
-      - "6333:6333"
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
+      - LANGSMITH_PROJECT=${LANGSMITH_PROJECT}
+      - LANGSMITH_ENDPOINT=${LANGSMITH_ENDPOINT}talk to redis container
+   

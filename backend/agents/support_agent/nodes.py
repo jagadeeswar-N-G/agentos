@@ -60,7 +60,10 @@ async def rag_resolve_node(state: SupportAgentState) -> SupportAgentState:
     query_vector = await embedder.aembed_query(state["user_message"])
 
     # search for the Qdrant for relevant articles
-    client = AsyncQdrantClient(url=os.getenv("QDRANT_URL", "http://localhost:6333"))
+    client = AsyncQdrantClient(
+            url=os.getenv("QDRANT_URL", "http://localhost:6333"),
+            api_key=os.getenv("QDRANT_API_KEY", None),
+            )
     
     results = await client.search(
         collection_name = "support_knowledge_base",
